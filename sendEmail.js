@@ -4,6 +4,8 @@ const Mailgen = require("mailgen");
 const {
   restaurantEmailTemplate,
   generalEmailTemplate,
+  rejectBookingEmail,
+  acceptBookingEmail,
 } = require("./emailBody");
 
 const mailConfig = {
@@ -34,22 +36,46 @@ const sendEmail = async (req, res) => {
     reservationTime,
     guestCount,
     phoneNumber,
+    emailType,
   } = req.body;
 
-  const emailBody =
-    useremail === process.env.MAILER_EMAIL
-      ? restaurantEmailTemplate({
-          useremail,
-          customerName,
-          reservationDate,
-          reservationTime,
-          guestCount,
-          phoneNumber,
-        })
-      : generalEmailTemplate(username, {
-          date: reservationDate,
-          time: reservationTime,
-        });
+  let emailBody;
+
+  if (emailType === "booking-reject") {
+    emailBody = rejectBookingEmail({
+      useremail,
+      customerName,
+      reservationDate,
+      reservationTime,
+      guestCount,
+      phoneNumber,
+    });
+  } else if (emailType === "booking-accept") {
+    emailBody = acceptBookingEmail({
+      useremail,
+      customerName,
+      reservationDate,
+      reservationTime,
+      guestCount,
+      phoneNumber,
+    });
+  } else {
+    emailBody =
+      useremail === process.env.MAILER_EMAIL
+        ? restaurantEmailTemplate({
+            useremail,
+            customerName,
+            reservationDate,
+            reservationTime,
+            guestCount,
+            phoneNumber,
+          })
+        : generalEmailTemplate({
+            username,
+            reservationDate,
+            reservationTime,
+          });
+  }
 
   try {
     const html = MailGenerator.generate(emailBody);

@@ -32,11 +32,11 @@ const restaurantEmailTemplate = (data = {}) => {
   };
 };
 
-const generalEmailTemplate = (username, timestamp = {}) => {
+const generalEmailTemplate = (data = {}) => {
   return {
     body: {
-      name: username,
-      intro: `We have received your booking request for ${timestamp?.date} at ${timestamp?.time}. 
+      name: data?.username,
+      intro: `We have received your booking request for ${data?.reservationDate} at ${data?.reservationTime}. 
         <br /> Please feel free to contact us at ${process.env.MAILER_EMAIL}`,
     },
   };
@@ -44,7 +44,7 @@ const generalEmailTemplate = (username, timestamp = {}) => {
 const acceptBookingEmail = (data = {}) => {
   return {
     body: {
-      name: username,
+      name: data?.customerName,
       intro: `Your booking has been approved. We will be pleased to serve you. tHE booking details are as follows:<br/>
       Email: ${data?.useremail}<br/>
       Phone number: ${data?.phoneNumber}<br/>
@@ -68,15 +68,17 @@ const acceptBookingEmail = (data = {}) => {
 };
 const rejectBookingEmail = (data = {}) => {
   return {
-    name: username,
-    intro: `Unfortunately we are not able to accept you booking request with details:<br/>
-      Email: ${data?.useremail}<br/>
-      Phone number: ${data?.phoneNumber}<br/>
-      Name: ${data?.customerName}<br/>
-      Pax: ${data?.guestCount}<br/>
-      Date: ${data?.reservationDate}<br/>
-      Time: ${data?.reservationTime}<br/>
-      We hope to serve you next time. Thank you.</br>`,
+    body: {
+      name: data?.customerName,
+      intro: `Unfortunately we are not able to accept you booking request with details:<br/>
+        Email: ${data?.useremail}<br/>
+        Phone number: ${data?.phoneNumber}<br/>
+        Name: ${data?.customerName}<br/>
+        Pax: ${data?.guestCount}<br/>
+        Date: ${data?.reservationDate}<br/>
+        Time: ${data?.reservationTime}<br/>
+        We hope to serve you next time. Thank you.</br>`,
+    },
   };
 };
 
