@@ -21,12 +21,21 @@ app.use(express.json());
 // API Routes
 app.use("/api/v1/email", routes);
 
-app.post("/api/cancelReservation/:reservationID", (req, res) => {
+app.delete("/api/cancelReservation/:reservationID", async (req, res) => {
   const reservationID = req.params.reservationID;
 
-  // Your cancellation logic goes here, e.g., update the reservation status in your database
+  try {
+    const reservationRef = admin
+      .firestore()
+      .collection("reservations")
+      .doc(reservationID);
 
-  res.json({ success: true, message: "Reservation canceled successfully" });
+    await reservationRef.delete();
+
+    res.json({ success: true, message: "Reservation canceled successfully" });
+  } catch (error) {
+    console.error("Error cancelling reservation:", error);
+  }
 });
 
 app.listen(PORT, () => {

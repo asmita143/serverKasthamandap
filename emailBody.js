@@ -57,9 +57,9 @@ const acceptBookingEmail = (data = {}) => {
         {
           instructions: "To cancel booking, please click here:",
           button: {
-            color: "#22BC66",
+            color: "#FF0000",
             text: "Cancel",
-            link: "https://mailgen.js/confirm?s=d9729feb74992cc3482b350163a1a010",
+            link: "https://localhost:5174/cancel/confirmation?reservationId:",
           },
         },
       ],
