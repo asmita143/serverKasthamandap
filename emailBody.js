@@ -17,14 +17,14 @@ const restaurantEmailTemplate = (data = {}) => {
           button: {
             color: "#22BC66",
             text: "Approve",
-            link: "https://mailgen.js/confirm?s=d9729feb74992cc3482b350163a1a010",
+            link: "https://localhost:5173/reservation/:reservationID/approve",
           },
         },
         {
           instructions: "To Reject the booking request, please click here:",
           button: {
             text: "Decline",
-            link: "https://mailgen.js/faq",
+            link: "https://localhost:5173/reservation/:reservationId/decline",
           },
         },
       ],
@@ -35,8 +35,8 @@ const restaurantEmailTemplate = (data = {}) => {
 const generalEmailTemplate = (data = {}) => {
   return {
     body: {
-      name: data?.username,
-      intro: `We have received your booking request for ${data?.reservationDate} at ${data?.reservationTime}. 
+      name: data?.customerName,
+      intro: `We have received your booking request for ${data?.Date} at ${data?.Time}. 
         <br /> Please feel free to contact us at ${process.env.MAILER_EMAIL}`,
     },
   };
@@ -59,7 +59,7 @@ const acceptBookingEmail = (data = {}) => {
           button: {
             color: "#FF0000",
             text: "Cancel",
-            link: "https://localhost:5174/cancel/confirmation?reservationId:",
+            link: "https://localhost:5173/cancel/confirmation?reservationId:",
           },
         },
       ],
