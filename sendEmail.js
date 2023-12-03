@@ -59,7 +59,8 @@ const sendEmail = async (req, res) => {
       guestCount,
       phoneNumber,
     });
-  } else {
+  }
+  if (!emailType || emailType === "") {
     emailBody =
       useremail === process.env.MAILER_EMAIL
         ? restaurantEmailTemplate({
