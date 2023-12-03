@@ -13,18 +13,19 @@ const restaurantEmailTemplate = (data = {}) => {
        Time: ${data?.reservationTime}<br/>`,
       action: [
         {
-          instructions: "to accept the booking request, please click here:",
+          instructions: "To accept the booking request, please click here:",
           button: {
             color: "#22BC66",
             text: "Approve",
-            link: "http://localhost:5173/reservation/:reservationID/approve",
+            link: `http://localhost:5173/reservation/${data?.reservationID}/approve`,
           },
         },
         {
           instructions: "To Reject the booking request, please click here:",
           button: {
+            color: "#ff0000",
             text: "Decline",
-            link: "http://localhost:5173/reservation/:reservationId/decline",
+            link: `http://localhost:5173/reservation/${data?.reservationID}/decline`,
           },
         },
       ],
@@ -37,7 +38,8 @@ const generalEmailTemplate = (data = {}) => {
     body: {
       name: data?.customerName,
       intro: `We have received your booking request for ${data?.reservationDate} at ${data?.reservationTime}. 
-        <br /> Please feel free to contact us at ${process.env.MAILER_EMAIL}`,
+      <br />We will get back to you as soon as possible.`,
+      outro: `<br /> Please feel free to contact us at <br/>Ravintola Kathamandap <br/>${process.env.MAILER_EMAIL}<br/>${data?.phoneNumber}`,
     },
   };
 };
@@ -45,13 +47,13 @@ const acceptBookingEmail = (data = {}) => {
   return {
     body: {
       name: data?.customerName,
-      intro: `Your booking has been approved. We will be pleased to serve you. tHE booking details are as follows:<br/>
-      Email: ${data?.useremail}<br/>
-      Phone number: ${data?.phoneNumber}<br/>
+      intro: `Your booking has been approved. We will be pleased to serve you. The booking details are as follows:<br/>
       Name: ${data?.customerName}<br/>
       Pax: ${data?.guestCount}<br/>
       Date: ${data?.reservationDate}<br/>
       Time: ${data?.reservationTime}<br/>
+      Email: ${data?.useremail}<br/>
+      Phone number: ${data?.phoneNumber}<br/>
       Please contact us at ${process.env.MAILER_EMAIL} if you want to change the booking detail or if you have any prerequisites.`,
       action: [
         {
@@ -59,7 +61,7 @@ const acceptBookingEmail = (data = {}) => {
           button: {
             color: "#FF0000",
             text: "Cancel",
-            link: "http://localhost:5173/cancel/confirmation?reservationId:",
+            link: `https://localhost:5173/cancel/confirmation/${data?.reservationID}`,
           },
         },
       ],

@@ -22,7 +22,7 @@ const MailGenerator = new Mailgen({
   theme: "default",
   product: {
     name: "Ravintola Kasthamandap",
-    link: "https://kasthamandap.netlify.app",
+    link: "http://localhost:5174",
     logo: "",
   },
 });
@@ -32,6 +32,7 @@ const sendEmail = async (req, res) => {
     useremail,
     username,
     customerName,
+    reservationID,
     reservationDate,
     reservationTime,
     guestCount,
@@ -50,7 +51,8 @@ const sendEmail = async (req, res) => {
       guestCount,
       phoneNumber,
     });
-  } else if (emailType === "booking-accept") {
+  }
+  if (emailType === "booking-accept") {
     emailBody = acceptBookingEmail({
       useremail,
       customerName,
@@ -68,6 +70,7 @@ const sendEmail = async (req, res) => {
             customerName,
             reservationDate,
             reservationTime,
+            reservationID,
             guestCount,
             phoneNumber,
           })
