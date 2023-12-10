@@ -5,7 +5,7 @@ const restaurantEmailTemplate = (data = {}) => {
     body: {
       name: "Kasthamandap",
       intro: `You have received a booking request from following customer : <br/>
-       Email: ${data?.useremail}<br/>
+       Email: ${data?.customerEmail}<br/>
        Phone number: ${data?.phoneNumber}<br/>
        Name: ${data?.customerName}<br/>
        Pax: ${data?.guestCount}<br/>
@@ -61,7 +61,7 @@ const acceptBookingEmail = (data = {}) => {
           button: {
             color: "#FF0000",
             text: "Cancel",
-            link: `https://localhost:5173/cancel/confirmation/${data?.reservationID}`,
+            link: `http://localhost:5173/cancel/confirmation/${data?.reservationID}`,
           },
         },
       ],

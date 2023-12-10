@@ -22,7 +22,7 @@ const MailGenerator = new Mailgen({
   theme: "default",
   product: {
     name: "Ravintola Kasthamandap",
-    link: "http://localhost:5174",
+    link: "http://localhost:5173",
     logo: "",
   },
 });
@@ -32,6 +32,7 @@ const sendEmail = async (req, res) => {
     useremail,
     username,
     customerName,
+    customerEmail,
     reservationID,
     reservationDate,
     reservationTime,
@@ -67,6 +68,7 @@ const sendEmail = async (req, res) => {
       useremail === process.env.MAILER_EMAIL
         ? restaurantEmailTemplate({
             useremail,
+            customerEmail,
             customerName,
             reservationDate,
             reservationTime,
