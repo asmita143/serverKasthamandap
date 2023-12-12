@@ -17,7 +17,7 @@ const restaurantEmailTemplate = (data = {}) => {
           button: {
             color: "#22BC66",
             text: "Approve",
-            link: `http://localhost:5173/reservation/${data?.reservationID}/approve`,
+            link: `https://kasthamandap-cdfd4.web.app/reservation/${data?.reservationID}/approve`,
           },
         },
         {
@@ -25,7 +25,7 @@ const restaurantEmailTemplate = (data = {}) => {
           button: {
             color: "#ff0000",
             text: "Decline",
-            link: `http://localhost:5173/reservation/${data?.reservationID}/decline`,
+            link: `https://kasthamandap-cdfd4.web.app/reservation/${data?.reservationID}/decline`,
           },
         },
       ],
@@ -54,17 +54,7 @@ const acceptBookingEmail = (data = {}) => {
       Time: ${data?.reservationTime}<br/>
       Email: ${data?.useremail}<br/>
       Phone number: ${data?.phoneNumber}<br/>
-      Please contact us at ${process.env.MAILER_EMAIL} if you want to change the booking detail or if you have any prerequisites.`,
-      action: [
-        {
-          instructions: "To cancel booking, please click here:",
-          button: {
-            color: "#FF0000",
-            text: "Cancel",
-            link: `http://localhost:5173/cancel/confirmation/${data?.reservationID}`,
-          },
-        },
-      ],
+      Please contact us at ${process.env.MAILER_EMAIL} if you want to change the booking detail or if you have any prerequisites or cancel the reservation`,
     },
   };
 };

@@ -1,1 +1,6 @@
 .env
+.firebaserc
+firebase.json
+.firebase/
+.github/
+public/

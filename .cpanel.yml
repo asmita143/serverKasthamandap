@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/ngwtzzpi/api.kasthamandap.fi/
+    - /bin/cp -R images $DEPLOYPATH
