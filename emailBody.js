@@ -17,7 +17,7 @@ const restaurantEmailTemplate = (data = {}) => {
           button: {
             color: "#22BC66",
             text: "Approve",
-            link: `https://kasthamandap-cdfd4.web.app/reservation/${data?.reservationID}/approve`,
+            link: `https://kasthamandap.fi/${data?.reservationID}/approve`,
           },
         },
         {
@@ -25,7 +25,7 @@ const restaurantEmailTemplate = (data = {}) => {
           button: {
             color: "#ff0000",
             text: "Decline",
-            link: `https://kasthamandap-cdfd4.web.app/reservation/${data?.reservationID}/decline`,
+            link: `https://kasthamandap.fi/reservation/${data?.reservationID}/decline`,
           },
         },
       ],
@@ -39,7 +39,7 @@ const generalEmailTemplate = (data = {}) => {
       name: data?.customerName,
       intro: `We have received your booking request for ${data?.reservationDate} at ${data?.reservationTime}. 
       <br />We will get back to you as soon as possible.`,
-      outro: `<br /> Please feel free to contact us at <br/>Ravintola Kathamandap <br/>${process.env.MAILER_EMAIL}<br/>${data?.phoneNumber}`,
+      outro: `<br /> Please feel free to contact us at <br/>Ravintola Kathamandap <br/>${process.env.MAILER_EMAIL},
     },
   };
 };
