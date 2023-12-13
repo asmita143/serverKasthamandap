@@ -39,7 +39,7 @@ const generalEmailTemplate = (data = {}) => {
       name: data?.customerName,
       intro: `We have received your booking request for ${data?.reservationDate} at ${data?.reservationTime}. 
       <br />We will get back to you as soon as possible.`,
-      outro: `<br /> Please feel free to contact us at <br/>Ravintola Kathamandap <br/>${process.env.MAILER_EMAIL},
+      outro: `<br /> Please feel free to contact us at <br/>Ravintola Kathamandap <br/>${process.env.MAILER_EMAIL}`,
     },
   };
 };
